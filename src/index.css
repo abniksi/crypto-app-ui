@@ -9,12 +9,7 @@ body {
 
 .jumbo {
   height: 100vh;
-  padding: 0em !important;
-}
-
-.homeScreenWords {
   display: flex;
-  height: 100%;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -24,25 +19,33 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  filter: grayscale(75%);
+  padding: 0em !important;
 }
 
-.test {
+.homeScreenWords {
+  background-color: rgba(36, 54, 101, 0.8);
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
+  justify-content: center;
 }
 
-h1 {
+.homeScreenWords h1 {
   font-size: 60px !important;
   color: white;
 }
 
-p {
+.homeScreenWords p {
   color: white;
 }
 
 .cardDeck {
   margin: 0px !important;
+}
+
+.aboutSection {
+  padding: 50px;
+  text-align: center;
 }
