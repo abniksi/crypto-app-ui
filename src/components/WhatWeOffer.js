@@ -1,10 +1,6 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Nav from 'react-bootstrap/Nav';
 import CardDeck from 'react-bootstrap/CardDeck';
 import Card from 'react-bootstrap/Card';
-import { Line } from 'react-chartjs-2';
 import '../index.css';
 
 function WhatWeOffer(){

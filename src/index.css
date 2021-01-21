@@ -7,12 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* canvas {
+  width: 400px !important;
+  height: 150px !important;
+  background-color: white;
+} */
+
 .jumbo {
   height: 100vh;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
   background: url(./images/homeScreenBackground.jpg) no-repeat center center
     fixed;
   -webkit-background-size: cover;
@@ -23,7 +26,7 @@ body {
 }
 
 .homeScreenWords {
-  background-color: rgba(36, 54, 101, 0.8);
+  background-color: rgba(27, 27, 27, 0.85);
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -48,4 +51,28 @@ body {
 .aboutSection {
   padding: 50px;
   text-align: center;
+}
+
+.nav {
+  width: 100vw;
+  background: aliceblue;
+}
+
+.realTimeCharts {
+}
+
+.charts {
+  display: flex;
+  justify-content: center;
+}
+
+.realTimeCharts h1 {
+  text-align: center;
+  padding: 50px;
+  margin-top: 50px;
+}
+
+img {
+  width: 36;
+  height: 36;
 }
