@@ -22,8 +22,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  text-align: center;
   padding: 0em !important;
-  margin: auto;
 }
 
 .homeScreenWords {
@@ -73,4 +73,10 @@ body {
 img {
   width: 36;
   height: 36;
+}
+
+@media (max-width: 600px) {
+  .jumbo {
+    width: 100% !important;
+  }
 }
