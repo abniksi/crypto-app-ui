@@ -6,7 +6,6 @@ import WhatWeOffer from '../components/WhatWeOffer'
 import ChartsJS from '../components/Charts';
 import Footer from '../components/Footer';
 import CryptoTable from '../components/CryptoTable';
-
   
 function HomeScreen(){
     return(

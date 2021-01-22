@@ -18,24 +18,20 @@ function ChartsJS(props) {
         cryptoArray.push({'x': i + 1, 'y': cryptoResponse[i][1]});
       }
 
-      console.log(cryptoArray)
       setCryptoData(cryptoArray)
   }
   
     return(
       <>
-        <div style={{height: 100}}>
-          <VictoryChart
-            theme={VictoryTheme.material}
-          >
+        <div style={{height: 100, display: "flex", justifyContent: "flex-end"}}>
             <VictoryLine
+              width={800}
               style={{
-                data: { stroke: "#c43a31" },
-                parent: { border: "1px solid #ccc"}
+                data: { stroke: "#c43a31", strokeWidth: 20 },
+                parent: { border: "0px solid #ccc", width: 100}
               }}
               data={cryptoData}
             />
-          </VictoryChart>
         </div>
       </>
     )

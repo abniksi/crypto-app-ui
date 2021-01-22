@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ChartsJS from './Charts';
 
-export default function BasicTable() {
+export default function BasicTable(props) {
     const [bitcoinPrice, setBitcoinPrice] = useState();
     const [ethereumPrice, setEthereumPrice] = useState();
     const [tetherPrice, setTetherPrice] = useState();
@@ -21,6 +21,7 @@ export default function BasicTable() {
     const [chainlinkPrice, setChainlinkPrice] = useState();
     const [stellarPrice, setStellarPrice] = useState();
 
+    const [priceChanges, setPriceChanges] = useState([]);
     //Getting all current prices on page load
     useEffect(() => {
         const fetchData = async () => {
@@ -56,9 +57,34 @@ export default function BasicTable() {
                 console.log(error);
             });
         }
+
+        const getPriceChange = async () => {
+            await Promise.all([
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/bitcoin'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/ethereum'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/tether'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/polkadot'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/ripple'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/cardano'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/litecoin'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/bitcoin-cash'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/chainlink'),
+                fetch('https://braden-crypto-service.herokuapp.com/api/crypto24HourChange/stellar'),
+            ]).then(function (responses) {
+                // Get a JSON object from each of the responses
+                return Promise.all(responses.map(function (response) {
+                    return response.json();
+                }));
+            }).then(function (data) {
+                setPriceChanges(data);
+            }).catch(function (error) {
+                // if there's an error, log it
+                console.log(error);
+            });
+        }
         fetchData();
-        
-    }, []);
+        getPriceChange();
+    }, [props]);
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -69,7 +95,7 @@ export default function BasicTable() {
         fontSize: 14,
         },
     }))(TableCell);
-    
+
     const StyledTableRow = withStyles((theme) => ({
         root: {
         '&:nth-of-type(odd)': {
@@ -91,16 +117,16 @@ export default function BasicTable() {
     const cryptoNames = {bitcoin: "bitcoin", ethereum: "ethereum", tether: "tether", polkadot:"polkadot", ripple: "ripple", cardano: "cardano", litecoin: "litecoin", bitcoinCash: "bitcoin-cash", chainlink: "chainlink", stellar: "stellar" }
 
     const rows = [
-        createData('  Bitcoin BTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png', bitcoinPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.bitcoin}/>),
-        createData('  Ethereum ETH', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png', ethereumPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.ethereum}/>),
-        createData('  Tether USDT', 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png', tetherPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.tether}/>),
-        createData('  Polkadot DOT', 'https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png', polkadotPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.polkadot}/>),
-        createData('  XRP XRP', 'https://s2.coinmarketcap.com/static/img/coins/64x64/52.png', ripplePrice, '2.4%', <ChartsJS cryptoName={cryptoNames.ripple}/>),
-        createData('  Cardano BTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png', cardanoPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.cardano}/>),
-        createData('  Litecoin LTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/2.png', litecoinPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.litecoin}/>),
-        createData('  Bitcoin Cash BCH', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png', bitcoinCashPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.bitcoinCash}/>),
-        createData('  Chainlink LINK', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png', chainlinkPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.chainlink}/>),
-        createData('  Stellar XLM', 'https://s2.coinmarketcap.com/static/img/coins/64x64/512.png', stellarPrice, '2.4%', <ChartsJS cryptoName={cryptoNames.stellar}/>),
+        createData('  Bitcoin BTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png', bitcoinPrice, parseFloat(priceChanges[0]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.bitcoin}/>),
+        createData('  Ethereum ETH', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png', ethereumPrice, parseFloat(priceChanges[1]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.ethereum}/>),
+        createData('  Tether USDT', 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png', tetherPrice, parseFloat(priceChanges[2]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.tether}/>),
+        createData('  Polkadot DOT', 'https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png', polkadotPrice, parseFloat(priceChanges[3]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.polkadot}/>),
+        createData('  XRP XRP', 'https://s2.coinmarketcap.com/static/img/coins/64x64/52.png', ripplePrice, parseFloat(priceChanges[4]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.ripple}/>),
+        createData('  Cardano BTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png', cardanoPrice, parseFloat(priceChanges[5]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.cardano}/>),
+        createData('  Litecoin LTC', 'https://s2.coinmarketcap.com/static/img/coins/64x64/2.png', litecoinPrice, parseFloat(priceChanges[6]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.litecoin}/>),
+        createData('  Bitcoin Cash BCH', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png', bitcoinCashPrice,parseFloat(priceChanges[7]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.bitcoinCash}/>),
+        createData('  Chainlink LINK', 'https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png', chainlinkPrice, parseFloat(priceChanges[8]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.chainlink}/>),
+        createData('  Stellar XLM', 'https://s2.coinmarketcap.com/static/img/coins/64x64/512.png', stellarPrice, parseFloat(priceChanges[9]).toFixed(2) + '%', <ChartsJS cryptoName={cryptoNames.stellar}/>),
     ];
 
     const classes = useStyles();
@@ -111,10 +137,10 @@ export default function BasicTable() {
             <Table style={{ margin: 'auto' }} className={classes.table} aria-label="customized table">
             <TableHead>
                 <TableRow>
-                <StyledTableCell>#</StyledTableCell>
+                <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell align="right">Current Price</StyledTableCell>
                 <StyledTableCell align="right">24 Hour Change</StyledTableCell>
-                <StyledTableCell align="right">60 Day Chart</StyledTableCell>
+                <StyledTableCell align="right">30 Day Chart</StyledTableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
