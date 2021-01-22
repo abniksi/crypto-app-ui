@@ -20,12 +20,11 @@ function HomeScreen(){
                 </Nav.Item>
             </Nav> */}
                 <div className="homeScreenWords">
-                    <h1>BN Crypto Tracker</h1>
-                    <p>This is a web app that allows you to keep track of all your favorite Crypto coins! Sign up today!</p>
+                    <h1 style={{ textAlign: "center" }}>BN Crypto Tracker</h1>
+                    <p style={{ textAlign: "center" }}>This is a web app that allows you to keep track of all your favorite Crypto coins! Sign up today!</p>
                     <p><Button variant="primary">Learn more</Button></p>
                 </div>
             </Jumbotron>
-
             <WhatWeOffer />
             <CryptoTable />
             <Footer />

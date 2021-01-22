@@ -1,7 +1,7 @@
 import React, { useState, useEffect   }  from 'react';
 import axios from 'axios';
 import '../index.css';
-import { VictoryLine, VictoryChart, VictoryTheme } from "victory";
+import { VictoryLine } from "victory";
 
 function ChartsJS(props) {
   const [cryptoData, setCryptoData] = useState();
@@ -27,7 +27,7 @@ function ChartsJS(props) {
             <VictoryLine
               width={800}
               style={{
-                data: { stroke: "#c43a31", strokeWidth: 20 },
+                data: { stroke: props.lineColor, strokeWidth: 20 },
                 parent: { border: "0px solid #ccc", width: 100}
               }}
               data={cryptoData}
