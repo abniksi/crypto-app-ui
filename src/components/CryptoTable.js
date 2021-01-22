@@ -15,7 +15,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
     },
     root:{
-        fontSize: 25
+        fontSize: 20
     }
 }))(TableCell);
 
@@ -28,9 +28,18 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const useStyles = makeStyles({
-    table: {
-    minWidth: 800,
-    },
+    root: {
+        display: 'flex',
+        // marginTop: theme.spacing.unit * 3,
+        overflowX: 'hide',
+      },
+      table: {
+        minWidth: 340,
+      },
+      tableCell: {
+        paddingRight: 4,
+        paddingLeft: 5
+      }
 });
 
 export default function BasicTable(props) {
@@ -133,10 +142,10 @@ export default function BasicTable(props) {
 
     return (
         <>
-            <h1 style={{ textAlign: "center", paddingTop: 50}}>Popular Crypto</h1>
-            <div style={{ width: '100%', padding: 100, fontFamily:'Graphik' }}>
+            <h1 style={{ textAlign: "center", padding: 50}}>Popular Crypto</h1>
+            <div style={{ width: '100%' }}>
                 <TableContainer component={Paper}>
-                <Table style={{ margin: 'auto' }} className={classes.table} aria-label="customized table">
+                <Table style={{ margin: 'auto', tableLayout: 'fixed' }} className={classes.table} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                     <StyledTableCell>Name</StyledTableCell>

@@ -13,12 +13,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* canvas {
-  width: 400px !important;
-  height: 150px !important;
-  background-color: white;
-} */
-
 .jumbo {
   height: 100vh;
   display: flex;
@@ -29,6 +23,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   padding: 0em !important;
+  margin: auto;
 }
 
 .homeScreenWords {
@@ -62,9 +57,6 @@ body {
 .nav {
   width: 100vw;
   background: aliceblue;
-}
-
-.realTimeCharts {
 }
 
 .charts {
