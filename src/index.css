@@ -4,6 +4,10 @@
   font-family: "Dosis" !important;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: Graphnik, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -72,4 +76,8 @@ body {
 img {
   width: 36;
   height: 36;
+}
+
+.styles_navSocial__3JBh_ {
+  width: 0% !important;
 }
